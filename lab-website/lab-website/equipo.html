@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipo — [Nombre del Laboratorio]</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html"><span>Lab</span>/ [Nombre del Laboratorio]</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="equipo.html">Equipo</a></li>
+          <li><a href="publicaciones.html">Publicaciones</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Equipo</h1>
+      <p class="lead">
+        [Descripción breve del equipo: cuántas personas lo integran, qué
+        roles hay, o cómo está organizado el laboratorio.]
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Este contenedor lo llena main.js a partir de INTEGRANTES en
+           js/contenido.js. Para agregar/quitar personas, edita ese
+           archivo — no esta página. -->
+      <div class="team-grid" id="lista-equipo">
+        <p class="empty-state">Cargando...</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="anio-actual"></span> [Nombre del Laboratorio]</span>
+      <span data-lab="correo"></span>
+    </div>
+  </footer>
+
+  <script src="js/contenido.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById("anio-actual").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+/* ==========================================================================
+   VARIABLES DE DISEÑO (Design Tokens)
+   Cambiar estos valores actualiza el color/tipografía en TODO el sitio.
+   ========================================================================== */
+:root {
+  /* Paleta */
+  --bg: #faf9f5;            /* fondo principal (papel) */
+  --bg-alt: #f0eee4;        /* fondo alterno para secciones */
+  --ink: #1b1e1c;           /* texto principal */
+  --ink-soft: #52564f;      /* texto secundario */
+  --accent: #2f5233;        /* verde bosque - color de marca del laboratorio */
+  --accent-soft: #dfe6d8;   /* fondo suave del acento (tarjetas, chips) */
+  --rule: #d9d5c7;          /* líneas divisorias finas */
+  --white: #ffffff;
+
+  /* Tipografía */
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+
+  /* Layout */
+  --max-width: 1100px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+}
+
+/* ==========================================================================
+   RESET BÁSICO
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+/* Accesibilidad: contorno de foco visible para navegación por teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.25rem; }
+
+p { max-width: 65ch; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* ==========================================================================
+   ENCABEZADO / NAVEGACIÓN
+   ========================================================================== */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.site-logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.site-logo span {
+  color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.nav-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--ink);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.main-nav a[aria-current="page"] {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.main-nav a:hover {
+  color: var(--accent);
+}
+
+/* Navegación responsive: en pantallas angostas se convierte en menú desplegable */
+@media (max-width: 720px) {
+  .nav-toggle { display: inline-flex; }
+
+  .main-nav {
+    display: none;
+    width: 100%;
+    border-top: 1px solid var(--rule);
+  }
+
+  .main-nav.is-open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-2) 0;
+  }
+
+  .main-nav li {
+    padding: var(--space-1) 0;
+  }
+
+  .site-header .container {
+    flex-wrap: wrap;
+  }
+}
+
+/* ==========================================================================
+   HERO (sección de introducción)
+   ========================================================================== */
+.hero {
+  padding: var(--space-5) 0 var(--space-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero-eyebrow {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-1);
+}
+
+.hero p.lead {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+/* ==========================================================================
+   SECCIONES GENERALES
+   ========================================================================== */
+.section {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section-alt {
+  background: var(--bg-alt);
+}
+
+.section-head {
+  margin-bottom: var(--space-4);
+}
+
+/* ==========================================================================
+   TARJETAS DE LÍNEAS DE INVESTIGACIÓN
+   ========================================================================== */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.research-card {
+  border-top: 3px solid var(--accent);
+  padding-top: var(--space-2);
+}
+
+.research-card h3 {
+  margin-bottom: var(--space-1);
+}
+
+.research-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   TARJETAS DE INTEGRANTES DEL EQUIPO
+   ========================================================================== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.member-card {
+  text-align: left;
+}
+
+.member-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+}
+
+.member-role {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-1);
+}
+
+.member-bio {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   LISTA DE PUBLICACIONES
+   ========================================================================== */
+.pub-year {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.pub-year:first-of-type {
+  margin-top: 0;
+}
+
+.pub-item {
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.pub-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.pub-meta {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   FORMULARIO DE CONTACTO
+   ========================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+.form-field {
+  margin-bottom: var(--space-2);
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: var(--space-2);
+}
+
+/* ==========================================================================
+   ESTADOS DE CARGA / VACÍO (usados por JS al insertar contenido dinámico)
+   ========================================================================== */
+.empty-state {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: var(--space-3) 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
